@@ -20,7 +20,7 @@ int main(void) {
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_IN_FLOATING;
   GPIO_Init(GPIOA, &GPIO_InitStructure);
 
-  for (;;) {
+  while(1) {
     if (GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_0) == 0){
       GPIO_WriteBit(GPIOC, GPIO_Pin_8, Bit_RESET);
     } else {

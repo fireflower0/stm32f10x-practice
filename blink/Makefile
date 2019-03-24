@@ -1,7 +1,7 @@
 # path to STM32F103 standard peripheral library
-STD_PERIPH_LIBS ?= ./STM32F10x_StdPeriph_Lib_V3.5.0/
+STD_PERIPH_LIBS ?= ./STM32F10x_StdPeriph_Lib_V3.5.0
 
-LIB_DIR          = $(STD_PERIPH_LIBS)Libraries
+LIB_DIR          = $(STD_PERIPH_LIBS)/Libraries
 CMSIS_DIR        = $(LIB_DIR)/CMSIS
 CM3_DIR          = $(CMSIS_DIR)/CM3
 CORE_SUPPORT_DIR = $(CM3_DIR)/CoreSupport
@@ -9,6 +9,9 @@ DEV_SUPPORT_DIR  = $(CM3_DIR)/DeviceSupport/ST/STM32F10x
 DRIVER_INC_DIR   = $(LIB_DIR)/STM32F10x_StdPeriph_Driver/inc
 DRIVER_SRC_DIR   = $(LIB_DIR)/STM32F10x_StdPeriph_Driver/src
 STARTUP_DIR      = $(DEV_SUPPORT_DIR)/startup/gcc_ride7
+
+PROJECT_TEMPLATE_DIR = $(STD_PERIPH_LIBS)/Project/STM32F10x_StdPeriph_Template
+LD_DIR = $(PROJECT_TEMPLATE_DIR)/TrueSTUDIO/STM32100B-EVAL
 
 # list of source files
 SOURCES  = main.c
@@ -33,10 +36,11 @@ BOARD_OPTS = -DHSE_VALUE=0x8000000 -DSTM32F10X_MD_VL -DUSE_STM32_VLD -DSYSCLK_FR
 
 # specify compiler flags
 CFLAGS  = -g -O2 -Wall
-CFLAGS += -T stm32_flash.ld
+CFLAGS += -T $(LD_DIR)/stm32_flash.ld
 CFLAGS += -mcpu=cortex-m3 -mtune=cortex-m3 -mthumb
 CFLAGS += -Wl,--gc-sections
 CFLAGS += -I.
+CFLAGS += -I $(PROJECT_TEMPLATE_DIR)
 CFLAGS += -I $(DEV_SUPPORT_DIR)
 CFLAGS += -I $(CORE_SUPPORT_DIR)
 CFLAGS += -I $(DRIVER_INC_DIR)

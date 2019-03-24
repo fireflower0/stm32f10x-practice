@@ -1,5 +1,5 @@
 # path to STM32F103 standard peripheral library
-STD_PERIPH_LIBS ?= ./STM32F10x_StdPeriph_Lib_V3.5.0
+STD_PERIPH_LIBS ?= ../STM32F10x_StdPeriph_Lib_V3.5.0
 
 LIB_DIR          = $(STD_PERIPH_LIBS)/Libraries
 CMSIS_DIR        = $(LIB_DIR)/CMSIS
